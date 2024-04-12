@@ -18,7 +18,7 @@ class UserController(Controller):
             email -- an email address string 
 
         returns:
-            user -- the user object associated to that email address (if multiple users are associated to that email: return the first one)o
+            user -- the user object associated to that email address (if multiple users are associated to that email: return the first one)
             None -- if no user is associated to that email address
 
         raises:

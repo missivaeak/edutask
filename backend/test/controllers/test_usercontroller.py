@@ -30,7 +30,22 @@ def test_get_user_by_email_invalid_email(usercontroller):
     with pytest.raises(ValueError):
         usercontroller.get_user_by_email(email)
 
-def test_get_user_by_email_multiple_users(usercontroller, capsys):
+def test_get_user_by_email_multiple_users_stdout_message(usercontroller, capsys):
+    # Arrange
+    email = "test@example.com"
+    user_1 = {"email": email, "name": "Test User 1"}
+    user_2 = {"email": email, "name": "Test User 2"}
+    usercontroller.dao.find.return_value = [user_1, user_2]
+
+    # Act
+    user = usercontroller.get_user_by_email(email)
+
+    # Assert
+    # Verify that the first user found is returned and a warning message is printed
+    captured = capsys.readouterr()
+    assert f'Error: more than one user found with mail {email}' in captured.out
+
+def test_get_user_by_email_multiple_users_return_user(usercontroller, capsys):
     # Arrange
     email = "test@example.com"
     user_1 = {"email": email, "name": "Test User 1"}
@@ -43,8 +58,6 @@ def test_get_user_by_email_multiple_users(usercontroller, capsys):
     # Assert
     # Verify that the first user found is returned and a warning message is printed
     assert user == user_1
-    captured = capsys.readouterr()
-    assert f'Error: more than one user found with mail {email}' in captured.out
 
 def test_get_user_by_email_no_user(usercontroller):
     # Arrange

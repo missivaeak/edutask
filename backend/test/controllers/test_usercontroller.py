@@ -30,7 +30,7 @@ def test_get_user_by_email_invalid_email(usercontroller):
     with pytest.raises(ValueError):
         usercontroller.get_user_by_email(email)
 
-def test_get_user_by_email_multiple_users_return_user(usercontroller, capsys):
+def test_get_user_by_email_multiple_users_return_user(usercontroller):
     # Arrange
     email = "test@example.com"
     user_1 = {"email": email, "name": "Test User 1"}

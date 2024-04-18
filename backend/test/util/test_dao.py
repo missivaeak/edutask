@@ -46,7 +46,6 @@ def dao():
 
     yield dao
 
-    # TODO: kolla om detta är rätt vis att deletea
     dao.collection.database.drop_collection('test')
 
 @pytest.mark.integration
@@ -82,5 +81,3 @@ def test_createReturnDocument(dao: DAO, constraint: str, data: dict):
 def test_createRaiseWriteError(dao: DAO, data: dict):
     with pytest.raises(WriteError):
         dao.create(data)
-
-

@@ -41,7 +41,7 @@ jobs:
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.10.0
       with:
-        mongodb-version: '3.6.8'
+        mongodb-version: 'latest'
     - name: Test with pytest
       run: |
         pytest

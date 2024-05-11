@@ -7,6 +7,7 @@ def usercontroller():
     dao = MagicMock()
     return UserController(dao)
 
+@pytest.mark.unit
 def test_get_user_by_email_valid_email(usercontroller):
     # Arrange
     email = "test@example.com"
@@ -20,7 +21,8 @@ def test_get_user_by_email_valid_email(usercontroller):
     # Assert
     # Verify that a user object is returned when a valid email is provided
     assert user == user_data
-    
+
+@pytest.mark.unit
 def test_get_user_by_email_invalid_email(usercontroller):
     # Arrange
     email = "This is an invalid email."
@@ -30,6 +32,7 @@ def test_get_user_by_email_invalid_email(usercontroller):
     with pytest.raises(ValueError):
         usercontroller.get_user_by_email(email)
 
+@pytest.mark.unit
 def test_get_user_by_email_multiple_users_return_user(usercontroller):
     # Arrange
     email = "test@example.com"
@@ -44,6 +47,7 @@ def test_get_user_by_email_multiple_users_return_user(usercontroller):
     # Verify that the first user found is returned and a warning message is printed
     assert user == user_1
 
+@pytest.mark.unit
 def test_get_user_by_email_no_user(usercontroller):
     # Arrange
     email = "test@example.com"
@@ -56,6 +60,7 @@ def test_get_user_by_email_no_user(usercontroller):
     # Verify that None is returned when no user is found
     assert user == None
 
+@pytest.mark.unit
 def test_get_user_by_email_db_error(usercontroller):
     # Arrange
     email = "test@example.com"
